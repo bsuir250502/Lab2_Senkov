@@ -44,21 +44,22 @@ typedef struct student {
             char *mother, *brother, *sister;
         } variant_3;
     } variant;
-} student;
+} student_t;
 
 char *fun_check_input();
 void fun_students_quantity(int *);
-void fun_select_input(student *, int);
-void fun_input_information_1(student *, int);
-void fun_output_main_information(student *, int);
-void fun_input_aditional_information(student *, int);
+void fun_select_input(student_t *, int);
+void fun_input_information_1(student_t *, int);
+void fun_output_main_information(student_t *, int);
+void fun_input_aditional_information(student_t *, int);
 
 int main()
 {
-    int number_of_students = 0;
+	int max_number_of_students = 30;
+	student_t array[max_number_of_students];
+    int number_of_students;
     puts("\n---------- Input ----------");
     fun_students_quantity(&number_of_students);
-    student array[number_of_students];
     fun_select_input(array, number_of_students);
     puts("\nAnd one week more.\n");
     return 0;
@@ -67,15 +68,11 @@ int main()
 char *fun_check_input()    /* function for checking input infomation (srting).*/
 {                               
     char *input_text;
-    input_text = (char *) malloc(30 * sizeof(char));
+    input_text = (char *) malloc( sizeof(char));
     do {
         __fpurge(stdin);
         fgets(input_text, 30, stdin);
-        if (input_text[0] == '\n' || input_text[0] == '0'
-            || input_text[0] == '9') {
-            puts("Invalid input, try again.");
-            continue;
-        } else if (input_text[0] > '0' && input_text[0] < '9') {
+        if (input_text[0] == '\n' || input_text[0] == ' ') {
             puts("Invalid input, try again.");
             continue;
         } else
@@ -93,7 +90,7 @@ void fun_students_quantity(int *number_of_students)    /* function for input num
     }
 }
 
-void fun_select_input(student * array, int number_of_students)    /* select input. */
+void fun_select_input(student_t * array, int number_of_students)    /* select input. */
 {                               
     int check = 0, select;
     puts("\nSelect type of input (enter 1 or 2):\n1)Only surname, name, patronymic.\n2)Surname, name, patronymic and information about family.");
@@ -114,7 +111,7 @@ void fun_select_input(student * array, int number_of_students)    /* select inpu
     }
 }
 
-void fun_select_output(student * array, int number_of_students)    /* select input. */
+void fun_select_output(student_t * array, int number_of_students)    /* select input. */
 {                               
     int check = 0, select;
     puts("\nSelect type of output (enter 1 or 2):\n1)Only surname, name, patronymic.\n");
@@ -136,7 +133,7 @@ void fun_select_output(student * array, int number_of_students)    /* select inp
     }
 }
 
-void fun_input_main_information(student * array, int number_of_students)
+void fun_input_main_information(student_t * array, int number_of_students)
 {
     for (int i = 0; i < number_of_students; i++) {
         printf("Enter, please, information about student number %d)",
@@ -150,7 +147,7 @@ void fun_input_main_information(student * array, int number_of_students)
     }
 }
 
-void fun_output_main_information(student * array, int number_of_students)
+void fun_output_main_information(student_t * array, int number_of_students)
 {
     puts("\n---------- Output ----------");
     for (int i = 0; i < number_of_students; i++) {

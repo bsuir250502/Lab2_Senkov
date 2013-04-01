@@ -1,2 +1,13 @@
-all:
-	gcc -Wall main.c -std=c99 -o main && ./main
+OBJ = main.o lib1.o
+CFLAGS = -Wall -std=c99
+
+all: bin
+
+bin: $(OBJ)
+	gcc $(CFLAGS) $(OBJ) -o bin
+
+%.o : %.c
+	gcc $(CFLAGS) -c $<
+
+clean:
+	rm bin $(OBJ)
