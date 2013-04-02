@@ -3,31 +3,11 @@
 #include<string.h>
 #include<stdio_ext.h>
 
-/*file *in = stdin ,затем fopen("Myfile","r")
-  fgets (buf,size,in);*/
-
-/*typedef struct information_1 {
+typedef struct information_1 {
 	char *surname;
 	char *name;
 	char *patronymic;
 } information_1;
-
-typedef struct information_2 {
-	char *surname, *name, *patronymic;
-	//int input_variant;
-	union {
-		struct {
-			char *mother, *fother, *brother;
-		} variant_1;
-		struct {
-			char *father, *sister, *brother, *mother;
-		} variant_2;
-		struct {
-			char *mother, *brother, *sister;
-		} variant_3;
-	} variant;
-} information_2;*/
-/* enum variant_of_union {"variant_1","variant_2","variant_3"}; */
 
 typedef struct student {
     char *surname;
@@ -48,10 +28,6 @@ typedef struct student {
 
 char *fun_check_input();
 void fun_students_quantity(int *);
-void fun_select_input(student_t *, int);
-void fun_input_information_1(student_t *, int);
-void fun_output_main_information(student_t *, int);
-void fun_input_aditional_information(student_t *, int);
 
 int main()
 {
@@ -63,6 +39,27 @@ int main()
     fun_select_input(array, number_of_students);
     puts("\nAnd one week more.\n");
     return 0;
+}
+
+/* -h */
+void auxiliary_information_for_user(int argc, char **argv)
+{
+    if (argc > 1 && !strcmp(argv[1], "-h")) {
+        puts("\n=====================================================================\n"
+             "MANUAL:\n\n"
+             "1)Select variant of input of exams:\n"
+             "- automatic input.\n"
+             "- manual input of exams.\n"
+             "2)Enter information about students:\n"
+             "- name.\n"
+             "- sername.\n"
+             "- patronymic.\n"
+             "- marks.\n"
+             "3)Enter number of semester, for output information about this semester.\n"
+             "                      >>And output of main task<< \n"
+             "=====================================================================\n");
+        exit(0);
+    }
 }
 
 char *fun_check_input()    /* function for checking input infomation (srting).*/
