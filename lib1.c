@@ -4,6 +4,7 @@
 /* function for input and valid infomation (srting). */
 void input_valid_string_data(char *information, char *input_text, int max_number_of_symbols)    
 {   
+    int i;
     while (1) {
         printf("%s", information);    
         fgets(input_text, max_number_of_symbols, stdin);
@@ -11,6 +12,8 @@ void input_valid_string_data(char *information, char *input_text, int max_number
             puts("Invalid input, try again.");
         }
         else {
+            for (i = 0; input_text[i] != '\n';i++ );
+            input_text[i--] = '\0';
             break;
         }
     }

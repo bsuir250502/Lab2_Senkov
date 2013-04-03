@@ -3,7 +3,6 @@
 
 #include <stdio.h>
 #include <stdlib.h>
-#include <stdio_ext.h>
 
 void input_valid_string_data(char *information, char *input_text, int max_number_of_symbols);
 int input_valid_int_data(char *information, int Min, int Max);
