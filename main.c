@@ -159,7 +159,7 @@ void output_of_main_infomation(information1_t *students_main, int number_of_stud
     int i;
     puts ("\n---------- Output of main infomation ----------\n");
     for (i = 0; i < number_of_students; i++) {
-        printf("\n%d.\n surname: %s\n name: %s\n patronymic: %s \n", i + 1, 
+        printf("\n%d.\n surname: %s\n name: %s\n patronymic: %s \n", i + 1,
                 students_main[i].surname, students_main[i].name, students_main[i].patronymic);
     }
 }
@@ -174,7 +174,7 @@ void working_with_information2_variant1(information1_t *students_main, informati
     }
     puts ("---------- Output ----------");
     for (i = 0; i < number_of_students; i++) {
-        printf("\n%d.\n surname: %s\n name: %s\n patronymic: %s\n mother: %s\n brother: %s\n father: %s\n", i + 1, 
+        printf("\n%d.\n surname: %s\n name: %s\n patronymic: %s\n mother: %s\n brother: %s\n father: %s\n", i + 1,
                 students_main[i].surname, students_main[i].name, students_main[i].patronymic,
                 students_all[i].additional_information.variant1.mother,students_all[i].additional_information.variant1.brother,
                 students_all[i].additional_information.variant1.father);
@@ -192,7 +192,7 @@ void working_with_information2_variant2(information1_t *students_main, informati
     }
     puts ("---------- Output ----------");
     for (i = 0; i < number_of_students; i++) {
-        printf("\n%d.\n surname: %s\n name: %s\n patronymic: %s\n mother: %s\n brother: %s\n father: %s\n sister: %s\n", i + 1, 
+        printf("\n%d.\n surname: %s\n name: %s\n patronymic: %s\n mother: %s\n brother: %s\n father: %s\n sister: %s\n", i + 1,
                 students_main[i].surname, students_main[i].name, students_main[i].patronymic,
                 students_all[i].additional_information.variant2.mother, students_all[i].additional_information.variant2.brother,
                 students_all[i].additional_information.variant2.father, students_all[i].additional_information.variant2.sister);
@@ -209,7 +209,7 @@ void working_with_information2_variant3(information1_t *students_main, informati
     }
     puts ("---------- Output ----------");
     for (i = 0; i < number_of_students; i++) {
-        printf("\n%d.\n surname: %s\n name: %s\n patronymic: %s\n mother: %s\n brother: %s\n sister: %s\n", i + 1, 
+        printf("\n%d.\n surname: %s\n name: %s\n patronymic: %s\n mother: %s\n brother: %s\n sister: %s\n", i + 1,
                 students_main[i].surname, students_main[i].name, students_main[i].patronymic,
                 students_all[i].additional_information.variant3.mother, students_all[i].additional_information.variant3.brother,
                 students_all[i].additional_information.variant3.sister);
