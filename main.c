@@ -6,9 +6,6 @@
 #define MAX_NUMBER_OF_STUDENTS 30
 #define MAX_NUMBER_OF_SYMBOLS 60
 
-/*file *in = stdin ,затем fopen("Myfile","r")
-  fgets (buf,size,in);*/
-
 typedef struct information1 {
     char name[MAX_NUMBER_OF_SYMBOLS];
 	char surname[MAX_NUMBER_OF_SYMBOLS];
@@ -16,20 +13,21 @@ typedef struct information1 {
 } information1_t;
 
 typedef struct variant1 {
-	char mother[MAX_NUMBER_OF_SYMBOLS];
-    char father[MAX_NUMBER_OF_SYMBOLS];
     char brother[MAX_NUMBER_OF_SYMBOLS];
+    char mother[MAX_NUMBER_OF_SYMBOLS];
+    char father[MAX_NUMBER_OF_SYMBOLS];
 } variant1_t;
 
 typedef struct variant2 {
+    char brother[MAX_NUMBER_OF_SYMBOLS];
     char mother[MAX_NUMBER_OF_SYMBOLS];
 	char father[MAX_NUMBER_OF_SYMBOLS];
     char sister[MAX_NUMBER_OF_SYMBOLS];
-    char brother[MAX_NUMBER_OF_SYMBOLS];
 } variant2_t;
+
 typedef struct variant3 {
-	char mother[MAX_NUMBER_OF_SYMBOLS];
     char brother[MAX_NUMBER_OF_SYMBOLS];
+    char mother[MAX_NUMBER_OF_SYMBOLS];
     char sister[MAX_NUMBER_OF_SYMBOLS];
 } variant3_t;
 
@@ -43,20 +41,20 @@ typedef struct information2 {
 
 /* function from lib1.h */
 void input_valid_string_data(char *, char *, int );
+int auxiliary_information_for_user(int , char **);
 
 /* functions for working with command line */
 void working_with_command_line(int , char** , information1_t *);
 int checking_commond_line(int , char **, information1_t *, int );
-void auxiliary_information_for_user();
 
 /* functions for working with information about students */
 int working_with_information1(information1_t *, int );
 int working_with_information2(information1_t *, int, char **);
 int input_of_main_information(information1_t *, int );
 void output_of_main_infomation(information1_t *, int );
-void working_with_information2_variant1(information1_t *, information2_t *, int );
-void working_with_information2_variant2(information1_t *, information2_t *, int );
-void working_with_information2_variant3(information1_t *, information2_t *, int );
+void information2_variant1(information1_t *, information2_t *, int );
+void information2_variant2(information1_t *, information2_t *, int );
+void information2_variant3(information1_t *, information2_t *, int );
 
 int main(int argc, char **argv)
 {
@@ -68,7 +66,7 @@ int main(int argc, char **argv)
 void working_with_command_line(int argc, char **argv, information1_t *students_main)
 {
     int number_of_students = 0;
-    if(checking_commond_line(argc, argv, students_main, number_of_students) == 0) {
+    if(!checking_commond_line(argc, argv, students_main, number_of_students)) {
         puts("\nInvalid input.\n"
               "If you want to read manual, enter './bin -h' in command line.\n");
         exit(0);
@@ -77,8 +75,8 @@ void working_with_command_line(int argc, char **argv, information1_t *students_m
 
 int checking_commond_line(int argc, char **argv, information1_t *students_main, int number_of_students)
 {
-    if (argc > 1 && !strcmp(argv[1],"-h")) {
-        auxiliary_information_for_user();
+    if ( auxiliary_information_for_user(argc, argv)) {
+        exit(0);
     }
     else if (!strcmp(argv[1],"-1") && !strcmp(argv[2],"-1")) {
        return working_with_information1(students_main, number_of_students);
@@ -89,26 +87,6 @@ int checking_commond_line(int argc, char **argv, information1_t *students_main, 
        return working_with_information2(students_main, number_of_students, argv);
     }
     return 0;
-}
-
-void auxiliary_information_for_user()
-{
-        puts("\n==========================================\n"
-             "\nMANUAL:\n\n"
-             "If You want to work with :\n"
-             "*  main information of students - enter './bin -1 -1' in comman line.\n"
-             "*  main information and data about :\n"
-             "     # mother, father, brother  ( enter './bin -2 -1' ) \n"
-             "*  main information and data about :\n"
-             "     # mother, father, sister, brother  ( enter './bin -2 -2' ) \n"
-             "*  main information and data about :\n"
-             "     # mother, sister, brother  ( enter './bin -2 -3' ) \n\n"
-             "Main information about student:\n"
-             "1) name.\n"
-             "2) sername.\n"
-             "3) patronymic.\n"
-             "\n==========================================\n");
-        exit(0);
 }
 
 int working_with_information1(information1_t *students_main, int number_of_students)
@@ -122,19 +100,14 @@ int working_with_information2(information1_t *students_main, int number_of_stude
 {
     number_of_students = input_of_main_information(students_main, number_of_students);
     information2_t students_all[number_of_students];
-    /*for (i = 0; i < number_of_students; i++) {
-        strcpy(students_all[i].main_information.surname, students_main[i].surname);
-        strcpy(students_all[i].main_information.name, students_main[i].name);
-        strcpy(students_all[i].main_information.patronymic, students_main[i].patronymic);
-    }*/
     if (!strcmp(argv[1],"-2") && !strcmp(argv[2],"-1")) {
-        working_with_information2_variant1(students_main, students_all, number_of_students);
+        information2_variant1(students_main, students_all, number_of_students);
     }
-    else if (!strcmp(argv[1],"-2") && !strcmp(argv[2],"-2")) {
-        working_with_information2_variant2(students_main, students_all, number_of_students);
+    else if (!strcmp(argv[2],"-2")) {
+        information2_variant2(students_main, students_all, number_of_students);
     }
     else {
-        working_with_information2_variant3(students_main, students_all, number_of_students);
+        information2_variant3(students_main, students_all, number_of_students);
     }
     return 1;
 }
@@ -164,10 +137,11 @@ void output_of_main_infomation(information1_t *students_main, int number_of_stud
     }
 }
 
-void working_with_information2_variant1(information1_t *students_main, information2_t *students_all, int number_of_students)
+void information2_variant1(information1_t *students_main, information2_t *students_all, int number_of_students)
 {
     int i;
     for (i = 0; i < number_of_students; i++) {
+        printf ("Information about %s %s",students_main[i].surname, students_main[i].name);
         input_valid_string_data("\nFather :", students_all[i].additional_information.variant1.father, MAX_NUMBER_OF_SYMBOLS);
         input_valid_string_data("Mother:", students_all[i].additional_information.variant1.mother, MAX_NUMBER_OF_SYMBOLS);
         input_valid_string_data("Brother :", students_all[i].additional_information.variant1.brother, MAX_NUMBER_OF_SYMBOLS);
@@ -181,10 +155,11 @@ void working_with_information2_variant1(information1_t *students_main, informati
     }
 }
 
-void working_with_information2_variant2(information1_t *students_main, information2_t *students_all, int number_of_students)
+void information2_variant2(information1_t *students_main, information2_t *students_all, int number_of_students)
 {
     int i;
     for (i = 0; i < number_of_students; i++) {
+        printf ("Information about %s %s",students_main[i].surname, students_main[i].name);
         input_valid_string_data("\nFather :", students_all[i].additional_information.variant2.father, MAX_NUMBER_OF_SYMBOLS);
         input_valid_string_data("Mother:", students_all[i].additional_information.variant2.mother, MAX_NUMBER_OF_SYMBOLS);
         input_valid_string_data("Brother :", students_all[i].additional_information.variant2.brother, MAX_NUMBER_OF_SYMBOLS);
@@ -199,10 +174,11 @@ void working_with_information2_variant2(information1_t *students_main, informati
     }
 }
 
-void working_with_information2_variant3(information1_t *students_main, information2_t *students_all, int number_of_students)
+void information2_variant3(information1_t *students_main, information2_t *students_all, int number_of_students)
 {
     int i;
     for (i = 0; i < number_of_students; i++) {
+        printf ("Information about %s %s",students_main[i].surname, students_main[i].name);
         input_valid_string_data("Mother:", students_all[i].additional_information.variant3.mother, MAX_NUMBER_OF_SYMBOLS);
         input_valid_string_data("Brother :", students_all[i].additional_information.variant3.brother, MAX_NUMBER_OF_SYMBOLS);
         input_valid_string_data("Sister :", students_all[i].additional_information.variant3.sister, MAX_NUMBER_OF_SYMBOLS);
