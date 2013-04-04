@@ -8,8 +8,8 @@
 
 typedef struct information1 {
     char name[MAX_NUMBER_OF_SYMBOLS];
-	char surname[MAX_NUMBER_OF_SYMBOLS];
-	char patronymic[MAX_NUMBER_OF_SYMBOLS];
+    char surname[MAX_NUMBER_OF_SYMBOLS];
+    char patronymic[MAX_NUMBER_OF_SYMBOLS];
 } information1_t;
 
 typedef struct variant1 {
@@ -21,7 +21,7 @@ typedef struct variant1 {
 typedef struct variant2 {
     char brother[MAX_NUMBER_OF_SYMBOLS];
     char mother[MAX_NUMBER_OF_SYMBOLS];
-	char father[MAX_NUMBER_OF_SYMBOLS];
+    char father[MAX_NUMBER_OF_SYMBOLS];
     char sister[MAX_NUMBER_OF_SYMBOLS];
 } variant2_t;
 
@@ -33,7 +33,7 @@ typedef struct variant3 {
 
 typedef struct information2 {
     union additional_information{
-		variant1_t variant1;
+	    variant1_t variant1;
         variant2_t variant2;
         variant3_t variant3;
 	} additional_information;
