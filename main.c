@@ -37,7 +37,7 @@ typedef struct information2 {
 
 /* function from lib1.h */
 void input_valid_string_data(char *, char *, int );
-int auxiliary_information_for_user(int , char **);
+void auxiliary_information_for_user();
 
 /* functions for working with command line */
 void working_with_command_line(int , char** , information1_t *);
@@ -64,17 +64,18 @@ void working_with_command_line(int argc, char **argv, information1_t *students_m
     if(!checking_commond_line(argc, argv, students_main, number_of_students)) {
         puts("\nInvalid input.\n"
               "If you want to read manual, enter './bin -h' in command line.\n"
-                 "Or you can enter '-1 -1','-2 -1','-2 -2','-2 -3'.\n");
+              "Or you can enter '-1 -1','-2 -1','-2 -2','-2 -3'.\n");
         exit(0);
     }
 }
 
 int checking_commond_line(int argc, char **argv, information1_t *students_main, int number_of_students)
 {
-    if ( auxiliary_information_for_user(argc, argv)) {
+    if (argc > 1 && !strcmp(argv[1],"-h")) {
+        auxiliary_information_for_user();
         exit(0);
     }
-    if (argc > 1 && argc < 4) {
+    else if (argc > 1 && argc < 4) {
         if (!strcmp(argv[1],"-1") && !strcmp(argv[2],"-1")) {
             return working_with_information1(students_main, number_of_students);
         }
@@ -149,11 +150,11 @@ int input_of_additional_information(information1_t *students_main, information2_
             input_valid_string_data("\nFather :", students_all[i].additional_information.variant1.father, MAX_NUMBER_OF_SYMBOLS);
         }
         else if (variant == 2) {
-            input_valid_string_data("Sister :", students_all[i].additional_information.variant2.sister, MAX_NUMBER_OF_SYMBOLS);
-            input_valid_string_data("\nFather :", students_all[i].additional_information.variant1.father, MAX_NUMBER_OF_SYMBOLS);
+            input_valid_string_data("\nSister :", students_all[i].additional_information.variant2.sister, MAX_NUMBER_OF_SYMBOLS);
+            input_valid_string_data("Father :", students_all[i].additional_information.variant1.father, MAX_NUMBER_OF_SYMBOLS);
         }
         else {
-            input_valid_string_data("Sister :", students_all[i].additional_information.variant2.sister, MAX_NUMBER_OF_SYMBOLS);
+            input_valid_string_data("\nSister :", students_all[i].additional_information.variant2.sister, MAX_NUMBER_OF_SYMBOLS);
         }
         input_valid_string_data("Mother:", students_all[i].mother, MAX_NUMBER_OF_SYMBOLS);
         input_valid_string_data("Brother :", students_all[i].brother, MAX_NUMBER_OF_SYMBOLS);

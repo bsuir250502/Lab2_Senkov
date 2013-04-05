@@ -38,16 +38,12 @@ int input_valid_int_data(char *information, int Min, int Max)
 }
 
 /* -h */
-int auxiliary_information_for_user(int argc, char **argv)
+void auxiliary_information_for_user()
 {   
     char input_buffer[128];
-    if (argc > 1 && !strcmp(argv[1],"-h")) {
-        FILE *file = fopen("Help(-h).txt","r");
-        while (fgets(input_buffer, strlen(input_buffer), file)) {
-            printf("%s", input_buffer);
-        }
-        fclose(file);
-        return 1;   
+    FILE *file = fopen("Help(-h).txt","r");
+    while (fgets(input_buffer, sizeof(input_buffer)/sizeof(*input_buffer), file)) {
+        printf("%s", input_buffer);
     }
-    return 0;
+    fclose(file);
 }
