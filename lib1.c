@@ -41,7 +41,7 @@ int input_valid_int_data(char *information, int Min, int Max)
 void auxiliary_information_for_user()
 {   
     char input_buffer[128];
-    FILE *file = fopen("Help(-h).txt","r");
+    FILE *file = fopen("README.txt","r");
     while (fgets(input_buffer, sizeof(input_buffer)/sizeof(*input_buffer), file)) {
         printf("%s", input_buffer);
     }
