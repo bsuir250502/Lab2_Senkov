@@ -38,7 +38,7 @@ int input_valid_int_data(char *information, int Min, int Max)
 }
 
 /* -h */
-void auxiliary_information_for_user()
+void help_output()
 {   
     char input_buffer[128];
     FILE *file = fopen("README.txt","r");

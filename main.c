@@ -35,9 +35,9 @@ typedef struct information2 {
 	} additional_information;
 } information2_t;
 
-/* function from lib1.h */
+/* functions from lib1.h */
 void input_valid_string_data(char *, char *, int );
-void auxiliary_information_for_user();
+void help_output();
 
 /* functions for working with command line */
 void working_with_command_line(int , char** , information1_t *);
@@ -72,7 +72,7 @@ void working_with_command_line(int argc, char **argv, information1_t *students_m
 int checking_commond_line(int argc, char **argv, information1_t *students_main, int number_of_students)
 {
     if (argc > 1 && !strcmp(argv[1],"-h")) {
-        auxiliary_information_for_user();
+        help_output();
         exit(0);
     }
     else if (argc > 1 && argc < 4) {
