@@ -1,19 +1,19 @@
 ===============================================================
 
-             MANUAL:
+                            MANUAL:
 
-    If You want to work with :
-    *  main information of students - enter './bin -1 -1' in comman line.
-    *  main information and data about :
-         # mother, father, brother  ( enter './bin -2 -1' ) 
-    *  main information and data about :
-         # mother, father, sister, brother  ( enter './bin -2 -2' ) 
-    *  main information and data about :
-         # mother, sister, brother  ( enter './bin -2 -3' ) 
+  If You want to work with :
+  * main information of students - enter './bin -main'.
+  * main information and data about :
+     # mother, father, brother ( enter './bin -main -mfb'). 
+  * main information and data about :
+     # mother, father, sister, brother ( enter './bin -main -mfbs'). 
+  * main information and data about :
+     # mother, sister, brother ( enter './bin -main -mbs').
 
-    Main information about student:
-    1) name.
-    2) sername.
-    3) patronymic.
+  main information about student:
+  1) name.
+  2) sername.
+  3) patronymic.
 
 ===============================================================

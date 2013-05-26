@@ -11,3 +11,4 @@ bin: $(OBJ)
 
 clean:
 	rm bin $(OBJ)
+
